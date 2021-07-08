@@ -46,4 +46,11 @@ func main() {
 	t := []string{"test", "123", "new", "slice"}
 
 	fmt.Println(t)
+
+	num := []int{1, 3, 2, 4, 2}
+
+	fmt.Println(num)
+
+	num = append(num, 2, 1, 3, 2, 4)
+	fmt.Println(num)
 }
