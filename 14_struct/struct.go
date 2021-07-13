@@ -21,35 +21,50 @@ func combinePeople(pp1, pp2 *People) {
 	pp1.name = pp1.name + pp2.name
 }
 
+func manipulatePeople(pp *People) {
+	pp.age = pp.age + 15
+}
+
+func manipulatenonPeople(pp People) {
+	pp.age = pp.age + 15
+}
+
 func main() {
 	bob := People{"Bob", 42}
-	fmt.Println(bob)
+	fmt.Println("Bob", bob)
 
 	ann := People{age: 35, name: "Ann"}
-	fmt.Println(ann)
+	fmt.Println("Ann", ann)
+	manipulatenonPeople(ann)
+	fmt.Println("Ann", ann)
 
 	nameonly := People{name: "Namehere"}
-	fmt.Println(nameonly)
+	fmt.Println("Nameonly", nameonly)
 
 	ageonly := People{age: 32}
-	fmt.Println(ageonly)
+	fmt.Println("Age only", ageonly)
 
 	pointerst := &People{
 		name: "Pointo",
 		age:  33,
 	}
 
-	fmt.Println(pointerst)
+	fmt.Println("Pointer struct", pointerst)
 	// pointer of struct can auto dereferenced
-	fmt.Println(pointerst.age)
+	fmt.Println("Pointer struct age", pointerst.age)
 
 	initPeople := newPeople("Johnny")
-	fmt.Println(initPeople)
+	fmt.Println("Init use pointer", initPeople)
+	fmt.Println("Init use pointer", initPeople.age)
+	manipulatePeople(initPeople)
+	fmt.Println("Init use pointer", initPeople.age)
+	manipulatePeople(initPeople)
+	fmt.Println("Init use pointer", initPeople.age)
 
 	combinePeople(initPeople, &bob)
-	fmt.Println(initPeople)
+	fmt.Println("Combine", initPeople)
 
 	combinePeople(&bob, initPeople)
-	fmt.Println(bob)
+	fmt.Println("Combine", bob)
 
 }
