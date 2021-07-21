@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-//error is communicate use same return value, not by raising exception
+//error is communicate use same return value like other function, not by raising exception. So user can easily make function for error handling
 
 func testError(param int) (int, error) {
 	if param == 42 {
