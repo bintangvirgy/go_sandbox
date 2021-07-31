@@ -1,23 +1,62 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // this is code for solving project euler in projecteuler.net
 
 func main() {
 
 	// problem 1
-	var vsum int
-	vsum = 0
-	prob1(&vsum)
-	fmt.Println(vsum)
+	// var vsum int
+	// vsum = 0
+	// prob1(&vsum)
+	// fmt.Println(vsum)
 
 	// problem 2
 	// vsumevent := 0
-
+	// prob2(&vsumevent)
 	// fmt.Println(vsumevent)
 
 	// problem 3
+	// vnum := 600851475143
+	// vres := prob3(&vnum)
+	// fmt.Println(vres)
+
+	// problem 4
+	vpalindrome := prob4()
+	fmt.Println(vpalindrome)
+
+}
+
+func prob4() int {
+	res := 0
+
+	return res
+
+}
+
+func prob3(num *int) int {
+	cur := *num
+	res := 0
+	for i := 2; i < int(math.Sqrt(float64(*num))); i++ {
+
+		for cur%i == 0 {
+			cur /= i
+			res = i
+			if cur == 1 {
+				break
+			}
+		}
+
+		if cur == 1 {
+			break
+		}
+	}
+
+	return res
 
 }
 
