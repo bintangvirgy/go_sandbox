@@ -34,6 +34,7 @@ func main() {
 	r.HandleFunc("/calculate/{fNum}/{operate}/{sNum}", func(rw http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		res := 0
+		process := true
 
 		fmt.Fprintf(rw, "Calculating %s %s %s\n", vars["fNum"], vars["operate"], vars["sNum"])
 		fNum, err1 := strconv.Atoi(vars["fNum"])
@@ -41,8 +42,12 @@ func main() {
 		if err1 != nil || err2 != nil {
 			fmt.Fprint(rw, "Number undetected")
 		} else {
-			calculate(fNum, vars["operate"], sNum, &res)
-			fmt.Fprintf(rw, "Result : %s", strconv.Itoa(res))
+			calculate(fNum, vars["operate"], sNum, &res, &process)
+			if !process {
+				fmt.Fprintf(rw, "Operation unknown")
+			} else {
+				fmt.Fprintf(rw, "Result : %s", strconv.Itoa(res))
+			}
 		}
 
 	})
@@ -50,7 +55,7 @@ func main() {
 	http.ListenAndServe(":8080", r)
 }
 
-func calculate(fNum int, operate string, sNum int, res *int) {
+func calculate(fNum int, operate string, sNum int, res *int, process *bool) {
 	switch operate {
 	case "+":
 		*res = fNum + sNum
@@ -62,5 +67,6 @@ func calculate(fNum int, operate string, sNum int, res *int) {
 		*res = fNum / sNum
 	default:
 		*res = 0
+		*process = false
 	}
 }
